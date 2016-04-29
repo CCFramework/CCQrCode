@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3B0A0EFB1CD3D5FB009FDD68 /* 5383.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3B0A0EFA1CD3D5FB009FDD68 /* 5383.wav */; };
+		3B0A0F221CD3DB36009FDD68 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B0A0F211CD3DB36009FDD68 /* images.xcassets */; };
 		FD40596F1CCB6ECF0095AA55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD40596E1CCB6ECF0095AA55 /* main.m */; };
 		FD4059721CCB6ECF0095AA55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4059711CCB6ECF0095AA55 /* AppDelegate.m */; };
 		FD4059751CCB6ECF0095AA55 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4059741CCB6ECF0095AA55 /* ViewController.m */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		3B0A0EFA1CD3D5FB009FDD68 /* 5383.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 5383.wav; sourceTree = "<group>"; };
+		3B0A0F211CD3DB36009FDD68 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		FD40596A1CCB6ECF0095AA55 /* CCQrCodeDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCQrCodeDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD40596E1CCB6ECF0095AA55 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FD4059701CCB6ECF0095AA55 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				3B0A0EFA1CD3D5FB009FDD68 /* 5383.wav */,
 				FD4059851CCB6ED90095AA55 /* CCQrCode.h */,
 				FD4059861CCB6ED90095AA55 /* CCQrCode.m */,
+				3B0A0F211CD3DB36009FDD68 /* images.xcassets */,
 			);
 			path = CCQrCode;
 			sourceTree = "<group>";
@@ -156,6 +159,7 @@
 				FD40597A1CCB6ECF0095AA55 /* Assets.xcassets in Resources */,
 				FD4059781CCB6ECF0095AA55 /* Main.storyboard in Resources */,
 				3B0A0EFB1CD3D5FB009FDD68 /* 5383.wav in Resources */,
+				3B0A0F221CD3DB36009FDD68 /* images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
