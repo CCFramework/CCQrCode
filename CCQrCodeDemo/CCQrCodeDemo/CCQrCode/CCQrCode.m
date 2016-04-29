@@ -40,7 +40,8 @@
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
     if (!input) {
-        NSLog(@"%@",error.localizedDescription);
+        // If the user info dictionary doesn’t contain a value for NSLocalizedDescriptionKey, a default string is constructed from the domain and code.
+        NSLog(@"scan error:%@",error.localizedDescription);
         return NO;
     }
     AVCaptureMetadataOutput *output = [[AVCaptureMetadataOutput alloc] init];
@@ -48,9 +49,9 @@
     [_captureSession addInput:input];
     [_captureSession addOutput:output];
     dispatch_queue_t dispatchQueue;
-    dispatchQueue = dispatch_queue_create("AVQueue", NULL);
+    dispatchQueue = dispatch_queue_create("QrCode", NULL);
     [output setMetadataObjectsDelegate:self queue:dispatchQueue];
-    [output setMetadataObjectTypes:@[AVMetadataObjectTypeUPCECode,AVMetadataObjectTypeCode39Code,AVMetadataObjectTypeCode39Mod43Code,AVMetadataObjectTypeEAN13Code,AVMetadataObjectTypeEAN8Code,AVMetadataObjectTypeCode93Code,AVMetadataObjectTypeCode128Code,AVMetadataObjectTypePDF417Code,AVMetadataObjectTypeQRCode,AVMetadataObjectTypeAztecCode,AVMetadataObjectTypeInterleaved2of5Code,AVMetadataObjectTypeITF14Code,AVMetadataObjectTypeDataMatrixCode]];
+    [output setMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]];
     
     _videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
     [_videoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
@@ -58,7 +59,6 @@
     [self.layer addSublayer:_videoPreviewLayer];
     
     [self boxRect];
-//    output.rectOfInterest = CGRectMake(0.2f, 0.2f, 0.8f, 0.8f);
     
     
     _boxView = [[UIView alloc] initWithFrame:_boxFrame];
@@ -66,16 +66,12 @@
     _boxView.layer.borderWidth = 1.0f;
     _boxView.clipsToBounds = YES;
     [self addSubview:_boxView];
-
-    NSLog(@"%f,%f,%f,%f",_boxView.frame.origin.x,_boxView.frame.origin.y,_boxView.frame.size.width,_boxView.frame.size.height);
-    output.rectOfInterest = CGRectMake(0.5, 0.5, 1, 1);
-    //82.800001,147.200002,248.400000,248.400000
     
-    //扫描线
+    //scan link
     _scanLayer = [[UIView alloc] initWithFrame:CGRectMake(0, -50, _boxView.bounds.size.width, 50)];
     _scanLayer.backgroundColor = self.scanColor;
     [_boxView addSubview:_scanLayer];
-    //扫描线尾巴
+    //Color fpih
     CAGradientLayer *layer = [CAGradientLayer layer];
     layer.frame = _scanLayer.bounds;
     layer.startPoint = CGPointMake(0, 1);
@@ -110,12 +106,12 @@
     CGRect frame = _scanLayer.frame;
     
     if (_scanLayer.frame.origin.y < (self.bounds.size.width-self.bounds.size.width*0.4 + 50)) {
-        //首尾式动画
+        //Fore and aft type animation
         [UIView beginAnimations:nil context:nil];
-        //执行动画
-        //设置动画执行时间
+        //Start animation
+        //animation timer
         [UIView setAnimationDuration:2.f];
-        //设置代理
+        //delegate
         [UIView setAnimationDelegate:self];
         frame.origin.y += 10;
         _scanLayer.frame = frame;
@@ -135,18 +131,18 @@ static SystemSoundID shake_sound_male_id = 0;
         if (_isForward == NO) {
             NSString *path = [[NSBundle mainBundle] pathForResource:@"5383" ofType:@"wav"];
             if (path) {
-                //注册声音到系统
+                //registered audio
                 AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:path],&shake_sound_male_id);
-                AudioServicesPlaySystemSound(shake_sound_male_id); //播放注册的声音，（此句代码，可以在本类中的任意位置调用，不限于本方法中）
-                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate); //让手机震动
+                AudioServicesPlaySystemSound(shake_sound_male_id); //play audio，（此句代码，可以在本类中的任意位置调用，不限于本方法中）
             }
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate); //vibration
             _isForward = YES;
 
             
             AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
             
             if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode]) {
-                NSLog(@"扫描:%@",metadataObj.stringValue);
+                NSLog(@"scan:%@",metadataObj.stringValue);
                 self.funcation(captureOutput, metadataObjects, connection, metadataObj, metadataObj.stringValue);
 
                 //限制作2秒后可扫描
