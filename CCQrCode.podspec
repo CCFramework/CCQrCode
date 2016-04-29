@@ -9,17 +9,17 @@
 Pod::Spec.new do |s|
 
 s.name         = "CCQrCode"
-s.version      = "0.1"
+s.version      = "1.0"
 s.summary      = "AVFoundation encapsulation of qr code scanning tools, support for multiple type code."
 s.homepage     = "https://github.com/CCFramework/CCQrCode"
 
 s.license      = { :type => "MIT", :file => "LICENSE" }
 s.author             = { "MuZiLee" => "li.feiheng@gmail.com" }
 s.platform     = :ios, "7.0"
-s.source       = { :git => "https://github.com/CCFramework/CCQrCode.git", :tag => "v0.1" }
-s.source_files  = "CCQrCode", "CCQrCode/*.{h,m}"
+s.source       = { :git => "https://github.com/CCFramework/CCQrCode.git", :tag => "v1.0" }
+s.source_files  = "CCQrCode", "CCQrCode/*.{h,m}","CCQrCode/*.{wav}","CCQrCode/*.{xcassets}"
 
-s.framework  = "AVFoundation"
+s.framework  = "AVFoundation","AudioToolbox"
 
 s.requires_arc = true
 
