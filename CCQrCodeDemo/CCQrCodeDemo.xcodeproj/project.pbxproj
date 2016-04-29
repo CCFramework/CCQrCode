@@ -7,20 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B0A0EFB1CD3D5FB009FDD68 /* 5383.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3B0A0EFA1CD3D5FB009FDD68 /* 5383.wav */; };
-		3B0A0F221CD3DB36009FDD68 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B0A0F211CD3DB36009FDD68 /* images.xcassets */; };
+		3B190ACD1CD3EE530071AA0F /* 5383.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3B190AC91CD3EE530071AA0F /* 5383.wav */; };
+		3B190ACE1CD3EE530071AA0F /* CCQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B190ACB1CD3EE530071AA0F /* CCQrCode.m */; };
+		3B190ACF1CD3EE530071AA0F /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B190ACC1CD3EE530071AA0F /* images.xcassets */; };
 		FD40596F1CCB6ECF0095AA55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD40596E1CCB6ECF0095AA55 /* main.m */; };
 		FD4059721CCB6ECF0095AA55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4059711CCB6ECF0095AA55 /* AppDelegate.m */; };
 		FD4059751CCB6ECF0095AA55 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4059741CCB6ECF0095AA55 /* ViewController.m */; };
 		FD4059781CCB6ECF0095AA55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD4059761CCB6ECF0095AA55 /* Main.storyboard */; };
 		FD40597A1CCB6ECF0095AA55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD4059791CCB6ECF0095AA55 /* Assets.xcassets */; };
 		FD40597D1CCB6ECF0095AA55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD40597B1CCB6ECF0095AA55 /* LaunchScreen.storyboard */; };
-		FD4059871CCB6ED90095AA55 /* CCQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4059861CCB6ED90095AA55 /* CCQrCode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3B0A0EFA1CD3D5FB009FDD68 /* 5383.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 5383.wav; sourceTree = "<group>"; };
-		3B0A0F211CD3DB36009FDD68 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
+		3B190AC91CD3EE530071AA0F /* 5383.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 5383.wav; sourceTree = "<group>"; };
+		3B190ACA1CD3EE530071AA0F /* CCQrCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCQrCode.h; sourceTree = "<group>"; };
+		3B190ACB1CD3EE530071AA0F /* CCQrCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCQrCode.m; sourceTree = "<group>"; };
+		3B190ACC1CD3EE530071AA0F /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		FD40596A1CCB6ECF0095AA55 /* CCQrCodeDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCQrCodeDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD40596E1CCB6ECF0095AA55 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FD4059701CCB6ECF0095AA55 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -31,8 +33,6 @@
 		FD4059791CCB6ECF0095AA55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD40597C1CCB6ECF0095AA55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD40597E1CCB6ECF0095AA55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FD4059851CCB6ED90095AA55 /* CCQrCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCQrCode.h; sourceTree = "<group>"; };
-		FD4059861CCB6ED90095AA55 /* CCQrCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCQrCode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +46,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B190AC81CD3EE530071AA0F /* CCQrCode */ = {
+			isa = PBXGroup;
+			children = (
+				3B190AC91CD3EE530071AA0F /* 5383.wav */,
+				3B190ACA1CD3EE530071AA0F /* CCQrCode.h */,
+				3B190ACB1CD3EE530071AA0F /* CCQrCode.m */,
+				3B190ACC1CD3EE530071AA0F /* images.xcassets */,
+			);
+			name = CCQrCode;
+			path = ../../CCQrCode;
+			sourceTree = "<group>";
+		};
 		FD4059611CCB6ECF0095AA55 = {
 			isa = PBXGroup;
 			children = (
@@ -70,7 +82,7 @@
 				FD4059731CCB6ECF0095AA55 /* ViewController.h */,
 				FD4059741CCB6ECF0095AA55 /* ViewController.m */,
 				FD4059761CCB6ECF0095AA55 /* Main.storyboard */,
-				FD4059841CCB6ED90095AA55 /* CCQrCode */,
+				3B190AC81CD3EE530071AA0F /* CCQrCode */,
 				FD4059791CCB6ECF0095AA55 /* Assets.xcassets */,
 				FD40597B1CCB6ECF0095AA55 /* LaunchScreen.storyboard */,
 				FD40597E1CCB6ECF0095AA55 /* Info.plist */,
@@ -85,17 +97,6 @@
 				FD40596E1CCB6ECF0095AA55 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		FD4059841CCB6ED90095AA55 /* CCQrCode */ = {
-			isa = PBXGroup;
-			children = (
-				3B0A0EFA1CD3D5FB009FDD68 /* 5383.wav */,
-				FD4059851CCB6ED90095AA55 /* CCQrCode.h */,
-				FD4059861CCB6ED90095AA55 /* CCQrCode.m */,
-				3B0A0F211CD3DB36009FDD68 /* images.xcassets */,
-			);
-			path = CCQrCode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,8 +159,8 @@
 				FD40597D1CCB6ECF0095AA55 /* LaunchScreen.storyboard in Resources */,
 				FD40597A1CCB6ECF0095AA55 /* Assets.xcassets in Resources */,
 				FD4059781CCB6ECF0095AA55 /* Main.storyboard in Resources */,
-				3B0A0EFB1CD3D5FB009FDD68 /* 5383.wav in Resources */,
-				3B0A0F221CD3DB36009FDD68 /* images.xcassets in Resources */,
+				3B190ACD1CD3EE530071AA0F /* 5383.wav in Resources */,
+				3B190ACF1CD3EE530071AA0F /* images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,7 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD4059751CCB6ECF0095AA55 /* ViewController.m in Sources */,
-				FD4059871CCB6ED90095AA55 /* CCQrCode.m in Sources */,
+				3B190ACE1CD3EE530071AA0F /* CCQrCode.m in Sources */,
 				FD4059721CCB6ECF0095AA55 /* AppDelegate.m in Sources */,
 				FD40596F1CCB6ECF0095AA55 /* main.m in Sources */,
 			);

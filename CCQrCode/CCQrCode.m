@@ -9,12 +9,16 @@
 #import "CCQrCode.h"
 #import <AudioToolbox/AudioToolbox.h>
 
+#define kCCPx(n) (n*0.5)
+
 @interface CCQrCode ()<AVCaptureMetadataOutputObjectsDelegate>
 {
     BOOL _isForward;
     CGRect _boxFrame;
 }
 @property (nonatomic, copy) CCQrCodeCallbackFunction funcation;
+
+
 
 @end
 
@@ -24,18 +28,24 @@
     self = [super initWithFrame:frame];
     if (self) {
         _isForward = NO;
-        self.scanColor = [UIColor cyanColor];
-        self.boxColor = [UIColor greenColor];
+        
+        self.colorLayer = [[UIView alloc] initWithFrame:self.bounds];
+        
+        
+        self.scanColor = [UIColor orangeColor];
+        self.boxColor = [UIColor clearColor];
         
     }
     return self;
 }
 
 - (void)boxRect {
-    _boxFrame = CGRectMake(_videoPreviewLayer.bounds.size.width*0.2f, _videoPreviewLayer.bounds.size.height*0.2f, self.bounds.size.width-self.bounds.size.width*0.4, self.bounds.size.width-self.bounds.size.width*0.4);
+    _boxFrame = CGRectMake(_videoPreviewLayer.bounds.size.width*0.15f, _videoPreviewLayer.bounds.size.height*0.2f, self.bounds.size.width-self.bounds.size.width*0.3, self.bounds.size.width-self.bounds.size.width*0.3);
 }
 
 - (BOOL)startReading:(CCQrCodeCallbackFunction)callback {
+    
+    
     NSError *error;
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
@@ -50,47 +60,79 @@
     dispatch_queue_t dispatchQueue;
     dispatchQueue = dispatch_queue_create("AVQueue", NULL);
     [output setMetadataObjectsDelegate:self queue:dispatchQueue];
-    [output setMetadataObjectTypes:@[AVMetadataObjectTypeUPCECode,AVMetadataObjectTypeCode39Code,AVMetadataObjectTypeCode39Mod43Code,AVMetadataObjectTypeEAN13Code,AVMetadataObjectTypeEAN8Code,AVMetadataObjectTypeCode93Code,AVMetadataObjectTypeCode128Code,AVMetadataObjectTypePDF417Code,AVMetadataObjectTypeQRCode,AVMetadataObjectTypeAztecCode,AVMetadataObjectTypeInterleaved2of5Code,AVMetadataObjectTypeITF14Code,AVMetadataObjectTypeDataMatrixCode]];
+    [output setMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]];
     
     _videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
     [_videoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-    [_videoPreviewLayer setFrame:self.layer.bounds];
+    [_videoPreviewLayer setFrame:self.bounds];
     [self.layer addSublayer:_videoPreviewLayer];
+    //添加图层到PreviewLayer上
+    [_videoPreviewLayer addSublayer:self.colorLayer.layer];
     
     [self boxRect];
-//    output.rectOfInterest = CGRectMake(0.2f, 0.2f, 0.8f, 0.8f);
     
     
     _boxView = [[UIView alloc] initWithFrame:_boxFrame];
     _boxView.layer.borderColor = self.boxColor.CGColor;
-    _boxView.layer.borderWidth = 1.0f;
+    //    _boxView.layer.borderWidth = 0.5f;
     _boxView.clipsToBounds = YES;
-    [self addSubview:_boxView];
-
-    NSLog(@"%f,%f,%f,%f",_boxView.frame.origin.x,_boxView.frame.origin.y,_boxView.frame.size.width,_boxView.frame.size.height);
-    output.rectOfInterest = CGRectMake(0.5, 0.5, 1, 1);
-    //82.800001,147.200002,248.400000,248.400000
+    [self.colorLayer addSubview:_boxView];
+    
     
     //扫描线
-    _scanLayer = [[UIView alloc] initWithFrame:CGRectMake(0, -50, _boxView.bounds.size.width, 50)];
+    _scanLayer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _boxView.bounds.size.width, 1)];
     _scanLayer.backgroundColor = self.scanColor;
     [_boxView addSubview:_scanLayer];
     //扫描线尾巴
-    CAGradientLayer *layer = [CAGradientLayer layer];
-    layer.frame = _scanLayer.bounds;
-    layer.startPoint = CGPointMake(0, 1);
-    layer.endPoint   = CGPointMake(0, 0);
-    layer.locations  = @[@(0), @(0.1), @(0.5)];
-    layer.colors = @[(__bridge id)[UIColor colorWithWhite:0 alpha:1.0].CGColor,
-                     (__bridge id)[UIColor colorWithWhite:0 alpha:0.3].CGColor,
-                     (__bridge id)[UIColor colorWithWhite:0 alpha:0.0].CGColor];
+    //    CAGradientLayer *layer = [CAGradientLayer layer];
+    //    layer.frame = _scanLayer.bounds;
+    //    layer.startPoint = CGPointMake(0, 0);
+    //    layer.endPoint   = CGPointMake(0, 0);
+    //    layer.locations  = @[@(0), @(1), @(0)];
+    //    layer.colors = @[(__bridge id)[UIColor colorWithWhite:0 alpha:0.0].CGColor,
+    //                     (__bridge id)[UIColor colorWithWhite:0 alpha:1.0].CGColor,
+    //                     (__bridge id)[UIColor colorWithWhite:0 alpha:0.0].CGColor];
+    //
+    //    _scanLayer.layer.mask = layer;
+    UIImageView *canvas = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"canvas"]];
+    canvas.frame = _scanLayer.bounds;
+    [_scanLayer addSubview:canvas];
+    _scanLayer.layer.mask = canvas.layer;
     
-    _scanLayer.layer.mask = layer;
+    //中间镂空的矩形框
+    CGRect myRect = _boxFrame;
     
+    
+    //背景
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:[UIScreen mainScreen].bounds cornerRadius:0];
+    //镂空
+    UIBezierPath *circlePath = [UIBezierPath bezierPathWithRoundedRect:myRect cornerRadius:0];
+    [path appendPath:circlePath];
+    [path setUsesEvenOddFillRule:YES];
+    
+    CAShapeLayer *fillLayer = [CAShapeLayer layer];
+    fillLayer.path = path.CGPath;
+    fillLayer.fillRule = kCAFillRuleEvenOdd;
+    fillLayer.fillColor = [UIColor blackColor].CGColor;
+    fillLayer.opacity = 0.7;
+    [self.colorLayer.layer addSublayer:fillLayer];
     
     self.funcation = callback;
-
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(moveScanLayer) userInfo:nil repeats:YES];
+    
+    //边框
+    UIImageView *qrcodecase = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"qrcodecase"]];
+    qrcodecase.frame = CGRectMake(_boxFrame.origin.x-8, _boxFrame.origin.y-8, _boxFrame.size.width+16, _boxFrame.size.height+16);
+    [self addSubview:qrcodecase];
+    
+    self.describeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(qrcodecase.frame)+10, self.frame.size.width, 21)];
+    self.describeLabel.textAlignment = NSTextAlignmentCenter;
+    self.describeLabel.textColor = [UIColor colorWithWhite:1.000 alpha:0.500];
+    self.describeLabel.text = @"将取景框对准二维码自动扫描";
+    self.describeLabel.font = [UIFont systemFontOfSize:13];
+    [self.colorLayer addSubview:self.describeLabel];
+    
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(moveScanLayer) userInfo:nil repeats:YES];
     [timer fire];
     [_captureSession startRunning];
     return YES;
@@ -105,11 +147,14 @@
     [_videoPreviewLayer removeFromSuperlayer];
 }
 
+
+
+
 - (void)moveScanLayer {
     
     CGRect frame = _scanLayer.frame;
     
-    if (_scanLayer.frame.origin.y < (self.bounds.size.width-self.bounds.size.width*0.4 + 50)) {
+    if (_scanLayer.frame.origin.y < (self.bounds.size.width-self.bounds.size.width*0.4+kCCPx(self.boxView.frame.size.height))) {
         //首尾式动画
         [UIView beginAnimations:nil context:nil];
         //执行动画
@@ -117,7 +162,7 @@
         [UIView setAnimationDuration:2.f];
         //设置代理
         [UIView setAnimationDelegate:self];
-        frame.origin.y += 10;
+        frame.origin.y += 25;
         _scanLayer.frame = frame;
         [UIView commitAnimations];
         
@@ -126,7 +171,7 @@
         _scanLayer.frame = frame;
         [self moveScanLayer];
     }
-
+    
 }
 static SystemSoundID shake_sound_male_id = 0;
 
@@ -141,21 +186,21 @@ static SystemSoundID shake_sound_male_id = 0;
                 AudioServicesPlaySystemSound(kSystemSoundID_Vibrate); //让手机震动
             }
             _isForward = YES;
-
+            
             
             AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
             
             if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode]) {
                 NSLog(@"扫描:%@",metadataObj.stringValue);
                 self.funcation(captureOutput, metadataObjects, connection, metadataObj, metadataObj.stringValue);
-
+                
                 //限制作2秒后可扫描
                 __weak typeof(self) weakSelf = self;
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [weakSelf setIsForward];
                 });
             }
-
+            
         }
     }
 }
@@ -163,7 +208,6 @@ static SystemSoundID shake_sound_male_id = 0;
 - (void)setIsForward {
     _isForward = NO;
 }
-
 
 @end
 
