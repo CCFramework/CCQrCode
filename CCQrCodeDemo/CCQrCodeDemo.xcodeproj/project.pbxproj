@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B190ACD1CD3EE530071AA0F /* 5383.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3B190AC91CD3EE530071AA0F /* 5383.wav */; };
 		3B190ACE1CD3EE530071AA0F /* CCQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B190ACB1CD3EE530071AA0F /* CCQrCode.m */; };
-		3B190ACF1CD3EE530071AA0F /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B190ACC1CD3EE530071AA0F /* images.xcassets */; };
+		3B38914A1CD3FF3B001297E6 /* 5383.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3B3891481CD3FF3B001297E6 /* 5383.wav */; };
+		3B38914B1CD3FF3B001297E6 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B3891491CD3FF3B001297E6 /* images.xcassets */; };
 		FD40596F1CCB6ECF0095AA55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD40596E1CCB6ECF0095AA55 /* main.m */; };
 		FD4059721CCB6ECF0095AA55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4059711CCB6ECF0095AA55 /* AppDelegate.m */; };
 		FD4059751CCB6ECF0095AA55 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4059741CCB6ECF0095AA55 /* ViewController.m */; };
@@ -19,10 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3B190AC91CD3EE530071AA0F /* 5383.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 5383.wav; sourceTree = "<group>"; };
 		3B190ACA1CD3EE530071AA0F /* CCQrCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCQrCode.h; sourceTree = "<group>"; };
 		3B190ACB1CD3EE530071AA0F /* CCQrCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCQrCode.m; sourceTree = "<group>"; };
-		3B190ACC1CD3EE530071AA0F /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
+		3B3891481CD3FF3B001297E6 /* 5383.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 5383.wav; sourceTree = "<group>"; };
+		3B3891491CD3FF3B001297E6 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		FD40596A1CCB6ECF0095AA55 /* CCQrCodeDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCQrCodeDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD40596E1CCB6ECF0095AA55 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FD4059701CCB6ECF0095AA55 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -49,10 +49,10 @@
 		3B190AC81CD3EE530071AA0F /* CCQrCode */ = {
 			isa = PBXGroup;
 			children = (
-				3B190AC91CD3EE530071AA0F /* 5383.wav */,
 				3B190ACA1CD3EE530071AA0F /* CCQrCode.h */,
 				3B190ACB1CD3EE530071AA0F /* CCQrCode.m */,
-				3B190ACC1CD3EE530071AA0F /* images.xcassets */,
+				3B3891481CD3FF3B001297E6 /* 5383.wav */,
+				3B3891491CD3FF3B001297E6 /* images.xcassets */,
 			);
 			name = CCQrCode;
 			path = ../../CCQrCode;
@@ -159,8 +159,8 @@
 				FD40597D1CCB6ECF0095AA55 /* LaunchScreen.storyboard in Resources */,
 				FD40597A1CCB6ECF0095AA55 /* Assets.xcassets in Resources */,
 				FD4059781CCB6ECF0095AA55 /* Main.storyboard in Resources */,
-				3B190ACD1CD3EE530071AA0F /* 5383.wav in Resources */,
-				3B190ACF1CD3EE530071AA0F /* images.xcassets in Resources */,
+				3B38914A1CD3FF3B001297E6 /* 5383.wav in Resources */,
+				3B38914B1CD3FF3B001297E6 /* images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
